@@ -1,19 +1,13 @@
+import Input from "./Input";
+
 function Login() {
   return (
     <>
       <h2>Formulario de Login</h2>
       <form>
-        <label>
-          <span>Correo electrónico: </span>
-          <br />
-          <input type="email" name="email" />
-        </label>
+        <Input label="Correo electronico :" type="email" name="email" />
         <br />
-        <label>
-          <span>Contraseña: </span>
-          <br />
-          <input type="password" name="password" />
-        </label>
+        <Input label="Contraseña :" type="password" name="password" />
         <br />
         <button type="submit">Ingresar</button>
       </form>
