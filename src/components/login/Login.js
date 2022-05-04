@@ -1,6 +1,7 @@
 import Input from "../loginInput/Input";
 import axios from "axios";
 import swAlert from "@sweetalert/with-react";
+import { Redirect } from "react-router-dom";
 
 function Login() {
   const submitHandle = (e) => {
@@ -39,6 +40,7 @@ function Login() {
         console.log(res.data);
         const tokenRecibido = res.data.token;
         localStorage.setItem("token", tokenRecibido);
+        <Redirect to="/list" />;
       });
   };
 
