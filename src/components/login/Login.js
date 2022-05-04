@@ -1,4 +1,5 @@
-import Input from "./Input";
+import Input from "../loginInput/Input";
+import axios from "axios";
 
 function Login() {
   const submitHandle = (e) => {
@@ -20,11 +21,16 @@ function Login() {
       return;
     }
 
-    if (email !== "challenge@alkemy.com" || password !== "react") {
+    if (email !== "challenge@alkemy.org" || password !== "react") {
       console.log("Credenciales inválidas");
       return;
     }
     console.log("ok, información lista para ser enviada");
+    axios
+      .post("http://challenge-react.alkemy.org", { email, password })
+      .then((res) => {
+        console.log(res.data);
+      });
   };
 
   return (
