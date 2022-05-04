@@ -37,6 +37,8 @@ function Login() {
       .then((res) => {
         swAlert(<h2>Perfecto, ingresaste correctamente!</h2>);
         console.log(res.data);
+        const tokenRecibido = res.data.token;
+        localStorage.setItem("token", tokenRecibido);
       });
   };
 
