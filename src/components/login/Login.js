@@ -1,9 +1,10 @@
 import Input from "../loginInput/Input";
 import axios from "axios";
 import swAlert from "@sweetalert/with-react";
-import { Redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate();
   const submitHandle = (e) => {
     e.preventDefault();
     const email = e.target.email.value;
@@ -40,7 +41,7 @@ function Login() {
         console.log(res.data);
         const tokenRecibido = res.data.token;
         localStorage.setItem("token", tokenRecibido);
-        <Redirect to="/list" />;
+        navigate("/list");
       });
   };
 
