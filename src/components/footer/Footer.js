@@ -1,16 +1,16 @@
 function Footer() {
   return (
-    <footer>
-      <nav>
+    <footer className="flex flex-row pt-16">
+      <nav className="pt-16">
         <ul>
           <li>
-            <a href="http://instagram.com" rel="noopener noreferrer">
+            <a className="pl-3" href="http://instagram.com" rel="noopener noreferrer">
               Ig
             </a>
           </li>
         </ul>
       </nav>
-      <p>Copyright Alkemy Challenge</p>
+      <p className="pl-5 pt-16">Copyright Alkemy Challenge</p>
     </footer>
   );
 }

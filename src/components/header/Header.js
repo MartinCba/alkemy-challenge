@@ -4,14 +4,14 @@ function Header() {
   return (
     <header>
       <nav>
-        <ul>
-          <li>
+        <ul className="flex flex-row">
+          <li className="pl-3 pt-3 pb5">
             <Link to="/">Home</Link>
           </li>
-          <li>
+          <li className="pl-3 pt-3 pb5">
             <Link to="/list">List</Link>
           </li>
-          <li>
+          <li className="pl-3 pt-3 pb5">
             <Link to="/contact">Contact</Link>
           </li>
         </ul>
