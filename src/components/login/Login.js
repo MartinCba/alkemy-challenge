@@ -47,7 +47,7 @@ function Login() {
 
   return (
     <>
-      <h2>Formulario de Login</h2>
+      <h2 className="text-3xl font-bold underline">Formulario de Login</h2>
       <form onSubmit={submitHandle}>
         <Input label="Correo electronico :" type="text" name="email" />
         <br />
