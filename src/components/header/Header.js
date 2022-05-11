@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function Header() {
   return (
-    <header>
+    <header className="">
       <nav>
         <ul className="flex flex-row">
           <li className="pl-3 pt-3 pb5">

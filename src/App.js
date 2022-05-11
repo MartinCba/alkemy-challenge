@@ -5,7 +5,7 @@ function App() {
   return (
     <div>
       <Header className="flex " />
-      <div className="flex justify-center pt-16 pb-16 mb-16">
+      <div className="">
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="list" element={<List />} />
