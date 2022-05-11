@@ -23,38 +23,41 @@ function List() {
       });
   }, [setMoviesList]);
 
+  if (!token) {
+    return <Navigate replace to="/" />;
+  }
+
   return (
     <>
-      {!token && <Navigate replace to="/" />}
-
       <div className="flex flex-row flex-wrap ">
-        {moviesList.map((oneMovie, index) => {
-          return (
-            <div className="basis-1/5 mx-8 my-4" key={index}>
-              <div className="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
-                <img
-                  className="rounded-t-lg"
-                  src={`https://image.tmdb.org/t/p/w500/${oneMovie.poster_path}`}
-                  alt=""
-                />
-                <div className="p-5">
-                  <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                    {oneMovie.title.substring(0, 18)}
-                  </h5>
-                  <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                    {oneMovie.overview.substring(0, 80)} ...
-                  </p>
-                  <Link
-                    to="/"
-                    className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-sky-300 rounded-lg hover:bg-sky-500 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                  >
-                    View detail
-                  </Link>
+        {moviesList &&
+          moviesList.map((oneMovie, index) => {
+            return (
+              <div className="basis-1/5 mx-8 my-4 truncate " key={index}>
+                <div className="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+                  <img
+                    className="rounded-t-lg object-contain "
+                    src={`https://image.tmdb.org/t/p/w500/${oneMovie.poster_path}`}
+                    alt=""
+                  />
+                  <div className="p-5">
+                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white truncate">
+                      {oneMovie.title}
+                    </h5>
+                    <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 truncate">
+                      {oneMovie.overview} ...
+                    </p>
+                    <Link
+                      to={`/detail?movieID=${oneMovie.id}`}
+                      className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-sky-300 rounded-lg hover:bg-sky-500 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-sky-500 dark:hover:bg-sky-700 dark:focus:ring-sky-800"
+                    >
+                      View detail
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
       </div>
     </>
   );

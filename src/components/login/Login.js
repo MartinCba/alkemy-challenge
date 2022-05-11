@@ -46,9 +46,12 @@ function Login() {
       });
   };
   const token = localStorage.getItem("token");
+  if (token) {
+    return <Navigate replace to="/list" />;
+  }
+
   return (
     <>
-      {token && <Navigate replace to="/list" />}
       <div className=" flex items-center justify-center  bg-gray-10 pt-16 pb-16 mb-16">
         <div className="px-8 py-6 mt-4 text-left bg-white shadow-lg">
           <h3 className="text-2xl font-bold text-center">
