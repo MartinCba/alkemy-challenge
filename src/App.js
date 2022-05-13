@@ -1,4 +1,4 @@
-import { Footer, Header, List, Login, Detail } from "./components";
+import { Footer, Header, List, Login, Detail, Results } from "./components";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -10,6 +10,7 @@ function App() {
           <Route path="/" element={<Login />} />
           <Route path="/list" element={<List />} />
           <Route path="/detail" element={<Detail />} />
+          <Route path="/results" element={<Results />} />
         </Routes>
       </div>
       <div className="fixed bottom-0 flex w-full items-center justify-center text-zinc-50 bg-sky-500 ">

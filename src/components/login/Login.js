@@ -41,11 +41,11 @@ function Login() {
         swAlert(<h2>Perfecto, ingresaste correctamente!</h2>);
         console.log(res.data);
         const tokenRecibido = res.data.token;
-        localStorage.setItem("token", tokenRecibido);
+        sessionStorage.setItem("token", tokenRecibido);
         navigate("/list");
       });
   };
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
   if (token) {
     return <Navigate replace to="/list" />;
   }

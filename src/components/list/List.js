@@ -5,7 +5,7 @@ import axios from "axios";
 import swAlert from "@sweetalert/with-react";
 
 function List() {
-  const token = localStorage.getItem("token");
+  const token = sessionStorage.getItem("token");
 
   const [moviesList, setMoviesList] = useState([]);
 
@@ -36,7 +36,7 @@ function List() {
               <div className="basis-1/5 mx-8 my-4 truncate " key={index}>
                 <div className="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                   <img
-                    className="rounded-t-lg object-contain "
+                    className="rounded-t-lg object-contain w-65 h-82"
                     src={`https://image.tmdb.org/t/p/w500/${oneMovie.poster_path}`}
                     alt=""
                   />
