@@ -1,6 +1,6 @@
 import { Footer, Header, List, Login, Detail, Results } from "./components";
 import { Routes, Route } from "react-router-dom";
-
+import "./app.css"
 function App() {
   return (
     <div>
@@ -8,7 +8,7 @@ function App() {
       <div className="">
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/list" element={<List />} />
+          <Route path="/list" element={<List/>} />
           <Route path="/detail" element={<Detail />} />
           <Route path="/results" element={<Results />} />
         </Routes>

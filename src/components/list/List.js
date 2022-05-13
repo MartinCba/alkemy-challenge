@@ -3,8 +3,48 @@ import { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
 import swAlert from "@sweetalert/with-react";
+import "../../app.css";
 
 function List() {
+  const favMovies = localStorage.getItem("favs");
+  let tempMoviesInFavs;
+
+  if (favMovies === null) {
+    tempMoviesInFavs = [];
+  } else {
+    tempMoviesInFavs = JSON.parse(favMovies);
+  }
+  console.log(tempMoviesInFavs);
+  const addOrRemoveFromFavs = (e) => {
+    const btn = e.currentTarget;
+    const parent = btn.parentElement;
+    const parent2 = parent.parentElement;
+    const parent3 = parent2.parentElement;
+    const imgURL = parent3.querySelector("img").getAttribute("src");
+    const title = parent3.querySelector("h5").innerText;
+    const movieDetail = parent3.querySelector("p").innerText;
+    const movieData = {
+      imgURL,
+      title,
+      movieDetail,
+      id: btn.dataset.movieId,
+    };
+    let movieIsInArray = tempMoviesInFavs.find((oneMovie) => {
+      return oneMovie.id === movieData.id;
+    });
+
+    if (!movieIsInArray) {
+      tempMoviesInFavs.push(movieData);
+      localStorage.setItem("favs", JSON.stringify(tempMoviesInFavs));
+      console.log("Se agregó la película");
+    } else {
+      let moviesLeft = tempMoviesInFavs.filter((oneMovie) => {
+        return oneMovie.id !== movieData.id;
+      });
+      localStorage.setItem("favs", JSON.stringify(moviesLeft));
+      console.log("Se eliminó la película");
+    }
+  };
   const token = sessionStorage.getItem("token");
 
   const [moviesList, setMoviesList] = useState([]);
@@ -47,12 +87,21 @@ function List() {
                     <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 truncate">
                       {oneMovie.overview} ...
                     </p>
-                    <Link
-                      to={`/detail?movieID=${oneMovie.id}`}
-                      className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-sky-300 rounded-lg hover:bg-sky-500 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-sky-500 dark:hover:bg-sky-700 dark:focus:ring-sky-800"
-                    >
-                      View detail
-                    </Link>
+                    <div className="flex flex-row justify-between">
+                      <Link
+                        to={`/detail?movieID=${oneMovie.id}`}
+                        className="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-sky-300 rounded-lg hover:bg-sky-500 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-sky-500 dark:hover:bg-sky-700 dark:focus:ring-sky-800"
+                      >
+                        View detail
+                      </Link>
+                      <button
+                        onClick={addOrRemoveFromFavs}
+                        data-movie-id={oneMovie.id}
+                        className="favourite-btn flex justify-center items-center hover:bg-sky-500 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-sky-500 dark:hover:bg-sky-700 dark:focus:ring-sky-800"
+                      >
+                        🤍
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
