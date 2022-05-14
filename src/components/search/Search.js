@@ -3,6 +3,46 @@ import { useNavigate } from "react-router-dom";
 function Search() {
   const navigate = useNavigate();
 
+  const addOrRemoveFromFavs = (e) => {
+    const favMovies = localStorage.getItem("favs");
+    let tempMoviesInFavs;
+
+    if (favMovies === null) {
+      tempMoviesInFavs = [];
+    } else {
+      tempMoviesInFavs = JSON.parse(favMovies);
+    }
+    console.log(tempMoviesInFavs);
+    const btn = e.currentTarget;
+    const parent = btn.parentElement;
+    const parent2 = parent.parentElement;
+    const parent3 = parent2.parentElement;
+    const imgURL = parent3.querySelector("img").getAttribute("src");
+    const title = parent3.querySelector("h5").innerText;
+    const movieDetail = parent3.querySelector("p").innerText;
+    const movieData = {
+      imgURL,
+      title,
+      movieDetail,
+      id: btn.dataset.movieId,
+    };
+    let movieIsInArray = tempMoviesInFavs.find((oneMovie) => {
+      return oneMovie.id === movieData.id;
+    });
+
+    if (!movieIsInArray) {
+      tempMoviesInFavs.push(movieData);
+      localStorage.setItem("favs", JSON.stringify(tempMoviesInFavs));
+      console.log("Se agregó la película");
+    } else {
+      let moviesLeft = tempMoviesInFavs.filter((oneMovie) => {
+        return oneMovie.id !== movieData.id;
+      });
+      localStorage.setItem("favs", JSON.stringify(moviesLeft));
+      console.log("Se eliminó la película");
+    }
+  };
+
   const submitHandle = (e) => {
     e.preventDefault();
     const keyword = e.currentTarget.keyword.value.trim();

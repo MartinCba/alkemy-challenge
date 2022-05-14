@@ -1,6 +1,14 @@
-import { Footer, Header, List, Login, Detail, Results } from "./components";
+import {
+  Footer,
+  Header,
+  List,
+  Login,
+  Detail,
+  Results,
+  Favorites,
+} from "./components";
 import { Routes, Route } from "react-router-dom";
-import "./app.css"
+import "./app.css";
 function App() {
   return (
     <div>
@@ -8,9 +16,10 @@ function App() {
       <div className="">
         <Routes>
           <Route path="/" element={<Login />} />
-          <Route path="/list" element={<List/>} />
+          <Route path="/list" element={<List />} />
           <Route path="/detail" element={<Detail />} />
           <Route path="/results" element={<Results />} />
+          <Route path="/favoritos" element={<Favorites />} />
         </Routes>
       </div>
       <div className="fixed bottom-0 flex w-full items-center justify-center text-zinc-50 bg-sky-500 ">

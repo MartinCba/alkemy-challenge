@@ -6,16 +6,16 @@ import swAlert from "@sweetalert/with-react";
 import "../../app.css";
 
 function List() {
-  const favMovies = localStorage.getItem("favs");
-  let tempMoviesInFavs;
-
-  if (favMovies === null) {
-    tempMoviesInFavs = [];
-  } else {
-    tempMoviesInFavs = JSON.parse(favMovies);
-  }
-  console.log(tempMoviesInFavs);
   const addOrRemoveFromFavs = (e) => {
+    const favMovies = localStorage.getItem("favs");
+    let tempMoviesInFavs;
+
+    if (favMovies === null) {
+      tempMoviesInFavs = [];
+    } else {
+      tempMoviesInFavs = JSON.parse(favMovies);
+    }
+    console.log(tempMoviesInFavs);
     const btn = e.currentTarget;
     const parent = btn.parentElement;
     const parent2 = parent.parentElement;

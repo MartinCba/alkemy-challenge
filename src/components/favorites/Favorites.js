@@ -1,9 +1,7 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
-import swAlert from "@sweetalert/with-react";
+import { Link, Navigate } from "react-router-dom";
 
-function Results() {
+function Favorites() {
   const addOrRemoveFromFavs = (e) => {
     const favMovies = localStorage.getItem("favs");
     let tempMoviesInFavs;
@@ -41,29 +39,20 @@ function Results() {
       });
       localStorage.setItem("favs", JSON.stringify(moviesLeft));
       console.log("Se eliminó la película");
+      window.location.reload();
     }
   };
-  let query = new URLSearchParams(window.location.search);
-  let keyword = query.get("keyword");
-  const navigate = useNavigate();
-  const [moviesResults, setMoviesResults] = useState([]);
+
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
-    const endPoint = `https://api.themoviedb.org/3/search/movie?api_key=276ffa053b8b41b0ff0e0966480f677d&language=en-US&query=${keyword}`;
-    axios
-      .get(endPoint)
-      .then((response) => {
-        const moviesArray = response.data.results;
-
-        if (moviesArray.length === 0) {
-          swAlert(<h4>Tu búsqueda no arrojó resultados...</h4>);
-          navigate(-1);
-        }
-
-        setMoviesResults(moviesArray);
-      })
-      .catch((error) => console.log);
-  });
+    const favsInLocal = localStorage.getItem("favs");
+    if (favsInLocal !== null) {
+      const favsArray = JSON.parse(favsInLocal);
+      setFavorites(favsArray);
+      console.log(favsArray);
+    }
+  }, []);
 
   const token = sessionStorage.getItem("token");
   if (!token) {
@@ -72,17 +61,15 @@ function Results() {
 
   return (
     <>
-      <h2 className="text-xl font-bold ml-8 mt-4">
-        Searched word: <em>{keyword}</em>
-      </h2>
+      <h2 className="text-xl font-bold ml-8 mt-4">Favorites movies: </h2>
       <div className="flex flex-row flex-wrap ">
-        {moviesResults.map((oneMovie, index) => {
+        {favorites.map((oneMovie, index) => {
           return (
             <div className="basis-1/5 mx-8 my-4 truncate " key={index}>
               <div className="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
                 <img
                   className="rounded-t-lg object-contain w-65 h-82"
-                  src={`https://image.tmdb.org/t/p/w500/${oneMovie.poster_path}`}
+                  src={oneMovie.imgURL}
                   alt=""
                 />
                 <div className="p-5">
@@ -90,7 +77,7 @@ function Results() {
                     {oneMovie.title}
                   </h5>
                   <p className="mb-3 font-normal text-gray-700 dark:text-gray-400 truncate">
-                    {oneMovie.overview} ...
+                    {oneMovie.movieDetail} ...
                   </p>
                   <div className="flex flex-row justify-between">
                     <Link
@@ -117,4 +104,4 @@ function Results() {
   );
 }
 
-export default Results;
+export default Favorites;

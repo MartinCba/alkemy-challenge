@@ -13,10 +13,10 @@ function Header() {
             <Link to="/list">List</Link>
           </li>
           <li className="pl-3 pt-3 pb5">
-            <Link to="/contact">Contact</Link>
+            <Link to="/favoritos">Favorites</Link>
           </li>
           <li className="pl-3 pt-3 pb5 fixed right-4">
-          <Search />
+            <Search />
           </li>
         </ul>
       </nav>
